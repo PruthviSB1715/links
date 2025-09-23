@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayurvedic Taste Theory - eTongue Project Reference</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c5f2d;
+            --secondary: #d4af37;
+            --accent: #4a7729;
+            --light: #f8f5f0;
+            --medium: #f0ede5;
+            --dark: #333;
+            --text: #444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f8f5f0 0%, #e8e1d1 100%);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--secondary);
+        }
+        
+        h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 22px;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 18px;
+            opacity: 0.8;
+            font-style: italic;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            background: var(--light);
+            border-bottom: 2px solid var(--secondary);
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            padding: 18px 30px;
+            background: var(--light);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-right: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .tab:last-child {
+            border-right: none;
+        }
+        
+        .tab.active {
+            background: white;
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .tab:hover {
+            background: var(--medium);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary);
+            font-size: 32px;
+        }
+        
+        h3 {
+            color: var(--accent);
+            margin: 25px 0 15px;
+            font-size: 24px;
+        }
+        
+        .intro {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--secondary);
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        
+        .taste-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .taste-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border-top: 4px solid var(--secondary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .taste-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+        }
+        
+        .taste-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+        
+        .taste-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            height: 80px;
+            width: 80px;
+            line-height: 80px;
+            background: var(--light);
+            border-radius: 50%;
+            display: inline-block;
+        }
+        
+        .taste-card h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+        
+        .taste-properties {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .property-item {
+            display: flex;
+            margin-bottom: 8px;
+        }
+        
+        .property-label {
+            font-weight: 600;
+            min-width: 120px;
+            color: var(--accent);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background-color: var(--light);
+        }
+        
+        tr:hover {
+            background-color: var(--medium);
+            transition: background 0.3s;
+        }
+        
+        .reference-list {
+            background: var(--light);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .reference-item {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px dashed #ccc;
+        }
+        
+        .reference-item:last-child {
+            border-bottom: none;
+        }
+        
+        .quote {
+            font-style: italic;
+            background: var(--medium);
+            padding: 20px;
+            border-left: 5px solid var(--secondary);
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .sanskrit {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .application-section {
+            background: linear-gradient(135deg, var(--light) 0%, var(--medium) 100%);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 35px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--primary);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 2px solid var(--secondary);
+            color: #666;
+            font-size: 16px;
+            background: var(--light);
+            padding: 30px;
+        }
+        
+        .highlight {
+            background-color: rgba(212, 175, 55, 0.2);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .decorative-element {
+            text-align: center;
+            margin: 30px 0;
+            color: var(--secondary);
+            font-size: 28px;
+            opacity: 0.7;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 10px;
+            }
+            
+            header {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            .subtitle {
+                font-size: 18px;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+                justify-content: center;
+            }
+            
+            .content {
+                padding: 25px 20px;
+            }
+            
+            .taste-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                font-size: 14px;
+            }
+            
+            th, td {
+                padding: 12px 10px;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            .nav-tabs, .footer {
+                display: none;
+            }
+            
+            .container {
+                box-shadow: none;
+            }
+            
+            .tab-content {
+                display: block !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-book-medical"></i> Ayurvedic Taste Theory (Rasa Shastra)</h1>
+            <p class="subtitle">Comprehensive Reference for eTongue Project Research & Development</p>
+            <p class="tagline">Bridging Ancient Wisdom with Modern Sensor Technology</p>
+        </header>
+        
+        <div class="nav-tabs">
+            <div class="tab active" data-tab="overview">
+                <i class="fas fa-home"></i> Overview
+            </div>
+            <div class="tab" data-tab="tastes">
+                <i class="fas fa-utensils"></i> Six Tastes
+            </div>
+            <div class="tab" data-tab="texts">
+                <i class="fas fa-book"></i> Classical Texts
+            </div>
+            <div class="tab" data-tab="applications">
+                <i class="fas fa-microchip"></i> eTongue Applications
+            </div>
+            <div class="tab" data-tab="principles">
+                <i class="fas fa-mortar-pestle"></i> Formulation Principles
+            </div>
+        </div>
+        
+        <div class="content">
+            <div id="overview" class="tab-content active">
+                <div class="intro">
+                    <p>Ayurveda, the ancient Indian system of medicine dating back over 5,000 years, developed a sophisticated understanding of taste (Rasa) and its therapeutic applications. This reference document integrates classical Ayurvedic texts with modern eTongue technology applications, providing a comprehensive foundation for research and development.</p>
+                </div>
+                
+                <h2>Introduction to Ayurvedic Taste System</h2>
+                <p>Ayurveda's Rasa Shastra (science of tastes) provides a detailed framework for understanding how taste influences physiology, health, and disease. The system is based on the concept that taste is not merely a sensory experience but a fundamental determinant of a substance's therapeutic properties.</p>
+                
+                <div class="quote">
+                    <div class="sanskrit">"रसो हि गुणवान् द्रव्यं गुणस्तदनुवर्तते"</div>
+                    <p>"The taste embodies the qualities of the substance, and the qualities follow the taste." - Sushruta Samhita, Sutrasthana 42:5</p>
+                </div>
+                
+                <h3>Core Principles</h3>
+                <ul>
+                    <li><strong>Six Primary Tastes:</strong> Each with specific elemental composition and physiological effects</li>
+                    <li><strong>Rasa Panchaka:</strong> Five parameters that determine a substance's complete therapeutic profile</li>
+                    <li><strong>Taste Combinations:</strong> Strategic blending for enhanced efficacy and reduced side effects</li>
+                    <li><strong>Dosha Relationship:</strong> Each taste affects the three biological humors (Vata, Pitta, Kapha) differently</li>
+                </ul>
+                
+                <div class="application-section">
+                    <h3>Relevance to eTongue Technology</h3>
+                    <p>The Ayurvedic taste classification system offers a sophisticated framework for correlating eTongue sensor data with pharmacological properties. By mapping sensor responses to Ayurvedic parameters, researchers can:</p>
+                    <ul>
+                        <li>Develop algorithms for automated taste classification</li>
+                        <li>Predict therapeutic properties based on taste profiles</li>
+                        <li>Optimize herbal formulations using taste synergy principles</li>
+                        <li>Create digital databases of taste-pharmacology relationships</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="tastes" class="tab-content">
+                <h2>The Six Tastes (Shad Rasa) in Ayurveda</h2>
+                <p>Ayurveda identifies six primary tastes, each with unique properties, elemental composition, and effects on physiology.</p>
+                
+                <div class="taste-grid">
+                    <div class="taste-card">
+                        <div class="taste-icon">🍯</div>
+                        <h4>Madhura (Sweet)</h4>
+                        <div class="property-item">
+                            <span class="property-label">Elements:</span> Earth + Water
+                        </div>
+                        <div class="property-item">
+                            <span class="property-label">Qualities:</span> Heavy, moist, cooling
+                        </div>
+                        <div class="property-item">
+                            <span class="property-label">Dosha Effect:</span> ↓ Vata, ↓ Pitta, ↑ Kapha
+                        </div>
+                        <div class="taste-properties">
+                            <strong>Examples:</strong> Grains, milk, honey, sweet fruits<br>
+                            <strong>Therapeutic:</strong> Nourishing, building, calming
+                        </div>
+                    </div>
+                    
+                    <div class="taste-card">
+                        <div class="taste-icon">🍋</div>
+                        <h4>Amla (Sour)</h4>
+                        <div class="property-item">
+                            <span class="property-label">Elements:</span> Earth + Fire
+                        </div>
+                        <div class="property-item">
+                            <span class="property-label">Qualities:</span> Light, heating, moist
+                        </div>
+                        <div class="property-item">
+                            <span class="property-label">Dosha Effect:</span> ↓ Vata, ↑ Pitta, ↑ Kapha
+                        </div>
+                        <div class="taste-properties">
+                            <strong>Examples:</strong> Citrus fruits, yogurt, fermented foods<br>
+                            <strong>Therapeutic:</strong> Digestive, energizing, appetizing
+                        </div>
+                    </div>
+                    
+                    <div class="taste-card">
+                        <div class="taste-icon">🧂</div>
+                        <h4>Lavana (Salty)</h4>
+                        <div class="property-item">
+                            <span class="property-label">Elements:</span> Water + Fire
+                        </div>
+                        <div class="property-item">
+                            <span class="property-label">Qualities:</span> Heavy, heating, moist
+                        </div>
+                        <div class="property-item">
+                            <span class="property-label">Dosha Effect:</span> ↓ Vata, ↑ Pitta, ↑ Kapha
+                        </div>
+                        <div class="taste-properties">
+                            <strong>Examples:</strong> Salt, seaweed, processed foods<br>
+                            <strong>Therapeutic:</strong> Moistening, softening, laxative
+                        </div>
+                    </div>
+                    
+                    <div class="taste-card">
+                        <div class="taste-icon">🌶️</div>
+                        <h4>Katu (Pungent)</h4>
+                        <div class="property-item">
+                            <span class="property-label">Elements:</span> Fire + Air
+                        </div>
+                        <div class="property-item">
+                            <span class="property-label">Qualities:</span> Light, heating, dry
+                        </div>
+                        <div class="property-item">
+                            <span class="property-label">Dosha Effect:</span> ↑ Vata, ↑ Pitta, ↓ Kapha
+                        </div>
+                        <div class="taste-properties">
+                            <strong>Examples:</strong> Ginger, garlic, chili peppers<br>
+                            <strong>Therapeutic:</strong> Stimulating, cleansing, digestant
+                        </div>
+                    </div>
+                    
+                    <div class="taste-card">
+                        <div class="taste-icon">🥬</div>
+                        <h4>Tikta (Bitter)</h4>
+                        <div class="property-item">
+                            <span class="property-label">Elements:</span> Air + Ether
+                        </div>
+                        <div class="property-item">
+                            <span class="property-label">Qualities:</span> Light, cooling, dry
+                        </div>
+                        <div class="property-item">
+                            <span class="property-label">Dosha Effect:</span> ↑ Vata, ↓ Pitta, ↓ Kapha
+                        </div>
+                        <div class="taste-properties">
+                            <strong>Examples:</strong> Leafy greens, turmeric, bitter gourd<br>
+                            <strong>Therapeutic:</strong> Detoxifying, lightening, anti-inflammatory
+                        </div>
+                    </div>
+                    
+                    <div class="taste-card">
+                        <div class="taste-icon">🍵</div>
+                        <h4>Kashaya (Astringent)</h4>
+                        <div class="property-item">
+                            <span class="property-label">Elements:</span> Air + Earth
+                        </div>
+                        <div class="property-item">
+                            <span class="property-label">Qualities:</span> Heavy, cooling, dry
+                        </div>
+                        <div class="property-item">
+                            <span class="property-label">Dosha Effect:</span> ↑ Vata, ↓ Pitta, ↓ Kapha
+                        </div>
+                        <div class="taste-properties">
+                            <strong>Examples:</strong> Pomegranates, lentils, green tea<br>
+                            <strong>Therapeutic:</strong> Healing, absorbing, anti-inflammatory
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quote">
+                    <div class="sanskrit">"षड्रसा: मधुराम्ललवणतिक्तोषणकषायकाः"</div>
+                    <p>"The six tastes are: sweet, sour, salty, bitter, pungent, and astringent." - Charaka Samhita, Sutrasthana 26:43</p>
+                </div>
+            </div>
+            
+            <div id="texts" class="tab-content">
+                <h2>Classical Ayurvedic Texts on Taste</h2>
+                <p>Ayurvedic knowledge is preserved in several classical texts that provide detailed information about taste theory and its applications.</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ayurvedic Text</th>
+                            <th>Period</th>
+                            <th>Key Contributions</th>
+                            <th>Relevance to eTongue</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Charaka Samhita</strong></td>
+                            <td>400 BCE - 200 CE</td>
+                            <td>Comprehensive taste classification, therapeutic applications, Rasa-Panchaka system</td>
+                            <td>Foundation for taste-drug action correlation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sushruta Samhita</strong></td>
+                            <td>400 BCE - 200 CE</td>
+                            <td>Surgical applications, wound healing properties of tastes</td>
+                            <td>Taste-based material compatibility analysis</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ashtanga Hridayam</strong></td>
+                            <td>500 CE</td>
+                            <td>Concise compilation, clinical applications, practical formulations</td>
+                            <td>Simplified taste-action relationships</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bhavaprakasha</strong></td>
+                            <td>1500 CE</td>
+                            <td>Extensive materia medica, taste-based drug classification</td>
+                            <td>Comprehensive taste-substance database</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sharngadhara Samhita</strong></td>
+                            <td>1300 CE</td>
+                            <td>Pharmaceutical preparations, Rasa Panchaka emphasis</td>
+                            <td>Formulation principles based on taste</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="reference-list">
+                    <div class="reference-item">
+                        <h3>Charaka Samhita (c. 400 BCE - 200 CE)</h3>
+                        <p><strong>Primary Reference:</strong> Sutrasthana Chapter 26 - "Rasa Vimana"</p>
+                        <p><strong>Key Contributions:</strong> Detailed classification of six tastes, their properties, and therapeutic applications. Establishes the Rasa Panchaka system.</p>
+                        <p><strong>Relevant Sections:</strong> Chapter 1 (Definition of Rasa), Chapter 26 (Detailed taste analysis), Chapter 27 (Taste combinations and effects)</p>
+                    </div>
+                    
+                    <div class="reference-item">
+                        <h3>Sushruta Samhita (c. 400 BCE - 200 CE)</h3>
+                        <p><strong>Primary Reference:</strong> Sutrasthana Chapter 42 - "Rasa Dravya Vijnaniya"</p>
+                        <p><strong>Key Contributions:</strong> Surgical applications of tastes, wound healing properties, detailed taste pharmacology.</p>
+                        <p><strong>Relevant Sections:</strong> Chapter 40 (Basic principles of taste), Chapter 42 (Detailed taste pharmacology), Chapter 46 (Taste in surgical preparations)</p>
+                    </div>
+                </div>
+                
+                <h3>Rasa Panchaka - The Five Aspects of Drug Action</h3>
+                <p>Ayurvedic pharmacology identifies five aspects that determine a substance's complete therapeutic profile:</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Definition</th>
+                            <th>Significance</th>
+                            <th>Textual References</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Rasa (Taste)</strong></td>
+                            <td>Initial taste perception when substance contacts tongue</td>
+                            <td>Determines initial physiological response</td>
+                            <td>Charaka Sutrasthana 1:64-65</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Guna (Quality)</strong></td>
+                            <td>Physical properties (heavy/light, hot/cold, etc.)</td>
+                            <td>Determines long-term effects on tissues</td>
+                            <td>Charaka Sutrasthana 1:49</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Virya (Potency)</strong></td>
+                            <td>Active energy principle (heating or cooling)</td>
+                            <td>Determines intensity of drug action</td>
+                            <td>Charaka Sutrasthana 26:67</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Vipaka (Post-digestive effect)</strong></td>
+                            <td>Taste transformation after digestion</td>
+                            <td>Determines effect on deeper tissues</td>
+                            <td>Charaka Sutrasthana 26:66</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prabhava (Special effect)</strong></td>
+                            <td>Unique, unexplained therapeutic action</td>
+                            <td>Specific effects beyond taste properties</td>
+                            <td>Charaka Sutrasthana 26:70</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="applications" class="tab-content">
+                <h2>Application to eTongue Technology</h2>
+                <p>The Ayurvedic taste classification system provides a sophisticated framework for correlating eTongue sensor data with pharmacological properties.</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ayurvedic Parameter</th>
+                            <th>eTongue Measurement</th>
+                            <th>Research Application</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Rasa (Taste)</strong></td>
+                            <td>Sensor response patterns</td>
+                            <td>Digital taste classification algorithm development</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Guna (Qualities)</strong></td>
+                            <td>Response intensity & kinetics</td>
+                            <td>Predicting physical properties and bioavailability</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Virya (Potency)</strong></td>
+                            <td>Signal amplitude & duration</td>
+                            <td>Correlating with therapeutic intensity and dosage</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Taste Combinations</strong></td>
+                            <td>Multi-sensor data fusion</td>
+                            <td>Analyzing synergistic effects in formulations</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Formulation Principles</strong></td>
+                            <td>Pattern recognition algorithms</td>
+                            <td>Optimizing herbal preparations based on taste synergy</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="application-section">
+                    <h3>Digital Correlation with Ayurvedic Parameters</h3>
+                    <p>The integration of Ayurvedic principles with eTongue technology enables:</p>
+                    <ul>
+                        <li><strong>Automated Taste Profiling:</strong> Machine learning algorithms can classify substances according to Ayurvedic taste categories</li>
+                        <li><strong>Predictive Modeling:</strong> Correlation of sensor data with therapeutic properties described in classical texts</li>
+                        <li><strong>Formulation Optimization:</strong> Using taste synergy principles to enhance efficacy of herbal preparations</li>
+                        <li><strong>Quality Control:</strong> Standardized assessment of herbal medicine quality based on taste profiles</li>
+                    </ul>
+                    
+                    <div class="quote">
+                        <div class="sanskrit">"रसेनैव हि जानीयाद्द्रव्यस्य गुणकर्मणी"</div>
+                        <p>"Through taste alone, one can know the qualities and actions of a substance." - Ashtanga Hridayam, Sutrasthana 1:19</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="principles" class="tab-content">
+                <h2>Taste-Based Medicine Formulation Principles</h2>
+                <p>Ayurvedic pharmacology emphasizes strategic taste combinations for optimal therapeutic effects with minimal side effects.</p>
+                
+                <div class="application-section">
+                    <h3>Principles of Taste Combination</h3>
+                    <p>Ayurvedic formulation science is based on sophisticated principles of taste interaction:</p>
+                    <ul>
+                        <li><strong>Synergistic Combinations:</strong> Bitter + Pungent for enhanced detoxification</li>
+                        <li><strong>Balancing Combinations:</strong> Sweet + Bitter to reduce side effects</li>
+                        <li><strong>Sequential Administration:</strong> Specific taste order for optimal absorption</li>
+                        <li><strong>Primary Taste Dominance:</strong> Base taste selection for formulation foundation</li>
+                        <li><strong>Dosha-Specific Formulations:</strong> Tailoring taste combinations to individual constitution</li>
+                    </ul>
+                    
+                    <h3>Classical Formulation Examples</h3>
+                    <p><strong>Triphala:</strong> Combination of three fruits with predominant bitter, astringent, and sweet tastes for digestive health and detoxification</p>
+                    <p><strong>Chyawanprash:</strong> Multi-herbal formulation with sweet as primary taste base for rejuvenation and immunity</p>
+                    <p><strong>Trikatu:</strong> Pungent combination for enhancing digestion and metabolism</p>
+                    <p><strong>Yashtimadhu (Licorice):</strong> Sweet-based formulation for respiratory and digestive health</p>
+                </div>
+                
+                <h3>Modern Research Applications</h3>
+                <p>Ayurvedic taste principles can inform modern pharmaceutical development:</p>
+                <ul>
+                    <li><strong>Drug Delivery Systems:</strong> Using taste masking techniques for bitter drugs</li>
+                    <li><strong>Synergistic Formulations:</strong> Combining herbs based on taste compatibility</li>
+                    <li><strong>Personalized Medicine:</strong> Tailoring formulations based on individual taste preferences and constitutional types</li>
+                    <li><strong>Quality Assessment:</strong> Using taste profiles as indicators of herbal medicine quality and authenticity</li>
+                </ul>
+                
+                <div class="decorative-element">
+                    <i class="fas fa-seedling"></i> • <i class="fas fa-flask"></i> • <i class="fas fa-brain"></i> • <i class="fas fa-heart"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>eTongue Project - Ayurvedic Taste Theory Reference</strong></p>
+            <p>Integrating Ancient Ayurvedic Wisdom with Modern Sensor Technology</p>
+            <p>Compiled from Charaka Samhita, Sushruta Samhita, Ashtanga Hridayam, and related classical texts</p>
+            <p>For research and academic purposes • © 2023 eTongue Research Initiative</p>
+        </div>
+    </div>
+
+    <script>
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                document.getElementById(tab.getAttribute('data-tab')).classList.add('active');
+            });
+        });
+        
+        // Add subtle animation to taste cards on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const tasteCards = document.querySelectorAll('.taste-card');
+            tasteCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.style.animation = 'fadeIn 0.5s ease forwards';
+            });
+        });
+    </script>
+</body>
+</html>
