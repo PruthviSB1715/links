@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BroHelp · business model · violet & gold</title>
+    <!-- Font & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            line-height: 1.3;
+            color: #1E1128; /* deep violet-black */
+            padding: 2rem 2rem 3rem 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* main header */
+        .hero-title {
+            margin-bottom: 2rem;
+        }
+
+        .hero-title h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #5B21B6, #6D28D9, #7C3AED, #2563EB);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .hero-title h1 i {
+            background: #FBBF24;
+            color: #2E1065;
+            padding: 12px 25px;
+            border-radius: 80px;
+            font-size: 2.5rem;
+            box-shadow: 0 8px 0 #92400E;
+        }
+
+        .hero-title .subhead {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: #F3E8FF;
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            border-left: 15px solid #FBBF24;
+            color: #2E1065;
+            margin-top: 1rem;
+            box-shadow: 0 6px 0 #C4B5FD;
+        }
+
+        /* title options row */
+        .title-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0 1.5rem 0;
+            background: #F8F4FF;
+            padding: 1.5rem;
+            border-radius: 60px;
+            border: 2px solid #6D28D9;
+        }
+
+        .option-pill {
+            background: white;
+            border: 3px solid #7C3AED;
+            border-radius: 60px;
+            padding: 0.8rem 1.8rem;
+            font-weight: 800;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 0 #2E1065;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .option-pill i {
+            color: #FBBF24;
+            font-size: 1.6rem;
+        }
+
+        .option-pill.picked {
+            background: #6D28D9;
+            color: white;
+            border-color: #FBBF24;
+        }
+
+        /* section headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 2.5rem 0 1.5rem 0;
+            background: #F8FAFC;
+            padding: 0.8rem 2rem 0.8rem 1.5rem;
+            border-radius: 80px;
+            border-left: 12px solid #6D28D9;
+        }
+
+        .section-header i {
+            font-size: 2.8rem;
+            background: linear-gradient(145deg, #5B21B6, #4F46E5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .section-header h2 {
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: #1E1128;
+        }
+
+        .section-header .badge {
+            background: #FBBF24;
+            color: #2E1065;
+            padding: 0.4rem 1.8rem;
+            border-radius: 60px;
+            font-weight: 900;
+            margin-left: auto;
+            font-size: 1.3rem;
+        }
+
+        /* revenue table style */
+        .revenue-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+            margin: 1rem 0;
+        }
+
+        .revenue-card {
+            background: white;
+            border: 3px solid #6D28D9;
+            border-radius: 30px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 0 #2E1065;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .revenue-card i {
+            font-size: 2.8rem;
+            background: linear-gradient(130deg, #5B21B6, #2563EB);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .revenue-card .content h3 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 0.3rem;
+        }
+
+        .revenue-card .content p {
+            font-weight: 700;
+            color: #4B5563;
+            font-size: 1.1rem;
+        }
+
+        /* phase table (3-phase) */
+        .phase-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 15px 25px -12px #5B21B6;
+            border: 2px solid #6D28D9;
+            margin: 1rem 0 2rem 0;
+        }
+
+        .phase-table th {
+            background: #6D28D9;
+            color: white;
+            font-weight: 900;
+            font-size: 1.3rem;
+            padding: 18px 12px;
+            border-right: 2px solid #FBBF24;
+            text-align: left;
+        }
+
+        .phase-table th:last-child { border-right: none; }
+
+        .phase-table td {
+            padding: 18px 16px;
+            font-weight: 700;
+            border-bottom: 2px solid #E9D5FF;
+            border-right: 2px solid #E9D5FF;
+            background: white;
+            color: #1E1128;
+        }
+
+        .phase-table td:last-child { border-right: none; }
+        .phase-table tr:last-child td { border-bottom: none; }
+
+        .phase-icon {
+            background: #F3E8FF;
+            border-radius: 40px;
+            padding: 6px 18px;
+            font-weight: 900;
+            display: inline-block;
+            border-left: 5px solid #FBBF24;
+        }
+
+        /* value proposition double column */
+        .value-panels {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .value-col {
+            background: white;
+            border: 3px solid #6D28D9;
+            border-radius: 40px;
+            padding: 1.8rem;
+            box-shadow: 0 8px 0 #2E1065;
+        }
+
+        .value-col h3 {
+            font-size: 2rem;
+            font-weight: 900;
+            border-bottom: 5px solid #FBBF24;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .value-col ul {
+            list-style: none;
+        }
+
+        .value-col li {
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #F8F4FF;
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            border-left: 6px solid #FBBF24;
+        }
+
+        .value-col li i {
+            color: #6D28D9;
+            font-size: 1.5rem;
+            width: 32px;
+        }
+
+        /* roadmap cards */
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .roadmap-card {
+            background: white;
+            border: 3px solid #6D28D9;
+            border-radius: 30px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 0 #2E1065;
+        }
+
+        .roadmap-card .timeline {
+            font-size: 1.4rem;
+            font-weight: 900;
+            background: #F3E8FF;
+            display: inline-block;
+            padding: 0.3rem 1.5rem;
+            border-radius: 40px;
+            margin-bottom: 1rem;
+            border-left: 6px solid #FBBF24;
+        }
+
+        .roadmap-card h4 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin: 0.5rem 0;
+        }
+
+        .roadmap-card p {
+            font-weight: 700;
+            color: #4B5563;
+            font-size: 1.1rem;
+        }
+
+        /* flywheel ascii but styled */
+        .flywheel-box {
+            background: #F3E8FF;
+            border: 5px solid #6D28D9;
+            border-radius: 70px;
+            padding: 2rem 2rem 2rem 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 12px 0 #2E1065;
+            font-family: 'Inter', monospace;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .flywheel-line {
+            font-size: 1.2rem;
+            line-height: 2;
+            white-space: pre-wrap;
+            font-weight: 800;
+        }
+
+        .flywheel-line i {
+            color: #FBBF24;
+            font-size: 1.6rem;
+            margin: 0 5px;
+        }
+
+        /* closing power lines */
+        .closing-quote {
+            background: linear-gradient(145deg, #2E1065, #5B21B6);
+            border-radius: 80px;
+            padding: 2rem 3rem;
+            margin: 2.5rem 0 1.5rem 0;
+            border: 5px solid #FBBF24;
+            box-shadow: 0 12px 0 #1E1128;
+            text-align: center;
+        }
+
+        .closing-quote p {
+            font-size: 2rem;
+            font-weight: 900;
+            color: white;
+            line-height: 1.4;
+        }
+
+        .closing-quote .alt {
+            font-size: 1.5rem;
+            color: #FBBF24;
+            margin-top: 1rem;
+        }
+
+        /* final slide layout */
+        .final-slide {
+            background: white;
+            border: 4px solid #6D28D9;
+            border-radius: 60px;
+            padding: 2rem;
+            margin: 3rem 0 1rem 0;
+            box-shadow: 0 15px 0 #2E1065;
+        }
+
+        .final-slide h3 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #5B21B6, #2563EB);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .final-slide .sub {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #4B5563;
+            border-left: 8px solid #FBBF24;
+            padding-left: 20px;
+            margin-bottom: 1.5rem;
+        }
+
+        .final-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .final-col {
+            background: #F8F4FF;
+            border-radius: 40px;
+            padding: 1.5rem;
+            border: 2px solid #7C3AED;
+        }
+
+        .final-col h4 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            border-bottom: 4px solid #FBBF24;
+            padding-bottom: 0.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .final-col ul {
+            list-style: none;
+        }
+
+        .final-col li {
+            margin-bottom: 0.7rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .final-col li i {
+            color: #6D28D9;
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            text-align: center;
+            font-weight: 900;
+            font-size: 1.4rem;
+            background: #F3E8FF;
+            padding: 1rem;
+            border-radius: 60px;
+        }
+
+        hr {
+            border: 2px solid #FBBF24;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- main title with pick -->
+        <div class="hero-title">
+            <h1>
+                <i class="fas fa-handshake"></i> FROM TRUST TO PROFIT
+                <i class="fas fa-coins" style="color: #FBBF24; background: none; box-shadow: none;"></i>
+            </h1>
+            <div class="subhead">💰 The BroHelp Economy · Sustainable Impact. Scalable Revenue.</div>
+        </div>
+
+        <!-- title options row -->
+        <div class="title-options">
+            <div class="option-pill picked"><i class="fas fa-check-circle"></i> 💰 From Trust to Profit: The BroHelp Economy</div>
+            <div class="option-pill"><i class="fas fa-chart-line"></i> 📈 Sustainable Impact. Scalable Revenue.</div>
+            <div class="option-pill"><i class="fas fa-rocket"></i> 🚀 Lure. Scale. Earn. Transform.</div>
+            <div class="option-pill"><i class="fas fa-hand-holding-heart"></i> 💸 Building Value. Generating Revenue. Growing Together.</div>
+        </div>
+
+        <!-- SECTION 1: REVENUE STREAMS -->
+        <div class="section-header">
+            <i class="fas fa-chart-pie"></i>
+            <h2>📊 REVENUE STREAMS</h2>
+            <span class="badge">6 sources</span>
+        </div>
+        <div class="revenue-grid">
+            <div class="revenue-card"><i class="fas fa-percent"></i><div class="content"><h3>💱 Transaction Service Fee</h3><p>Small % from each completed task</p></div></div>
+            <div class="revenue-card"><i class="fas fa-coins"></i><div class="content"><h3>🪙 Currency Purchase Margin</h3><p>Micro-markup on BroCoin purchases</p></div></div>
+            <div class="revenue-card"><i class="fas fa-bullhorn"></i><div class="content"><h3>🚀 Featured Task Listings</h3><p>Booster packs for urgent tasks</p></div></div>
+            <div class="revenue-card"><i class="fas fa-crown"></i><div class="content"><h3>⭐ Premium Helper Profiles</h3><p>Verified top helpers pay small fee</p></div></div>
+            <div class="revenue-card"><i class="fas fa-truck"></i><div class="content"><h3>📦 Logistics Commission</h3><p>Cut from physical delivery coordination</p></div></div>
+            <div class="revenue-card"><i class="fas fa-ticket"></i><div class="content"><h3>🎟️ Event Partnerships</h3><p>Commission from college event registrations</p></div></div>
+        </div>
+
+        <!-- SECTION 2: 3-PHASE GROWTH -->
+        <div class="section-header">
+            <i class="fas fa-chart-line"></i>
+            <h2>📈 3-PHASE GROWTH STRATEGY</h2>
+            <span class="badge">lure · breakeven · scale</span>
+        </div>
+        <table class="phase-table">
+            <thead><tr><th>Phase</th><th>Focus</th><th>Strategy</th><th>Goal</th></tr></thead>
+            <tbody>
+                <tr><td><span class="phase-icon"><i class="fas fa-rocket"></i> 🚀 PHASE 1: LURE (0-6 Mos)</span></td><td>User Acquisition</td><td>• Zero platform fees<br>• Free signup bonuses<br>• Heavy college outreach<br>• Operate at loss</td><td>Build habit & trust<br>10K+ active users<br>Network effects begin</td></tr>
+                <tr><td><span class="phase-icon"><i class="fas fa-scale-balanced"></i> ⚖️ PHASE 2: BREAKEVEN (6-12 Mos)</span></td><td>Optimization</td><td>• Introduce micro-fees (1-2%)<br>• Launch premium features<br>• Refine logistics partnerships<br>• Data-driven retention</td><td>Cover operational costs<br>Sustainable unit economics<br>Breakeven achieved</td></tr>
+                <tr><td><span class="phase-icon"><i class="fas fa-chart-line"></i> 📈 PHASE 3: PROFIT & SCALE (Year 2+)</span></td><td>Expansion</td><td>• Full revenue stream activation<br>• AI automation reduces costs<br>• Multi-campus rollout<br>• Enterprise partnerships</td><td>15-20% profit margins<br>National presence<br>Ecosystem flywheel</td></tr>
+            </tbody>
+        </table>
+
+        <!-- SECTION 3: VALUE PROPOSITION -->
+        <div class="section-header">
+            <i class="fas fa-gem"></i>
+            <h2>💡 VALUE PROPOSITION</h2>
+            <span class="badge">dual focus</span>
+        </div>
+        <div class="value-panels">
+            <div class="value-col"><h3><i class="fas fa-user-graduate"></i> For Students</h3>
+                <ul><li><i class="fas fa-check-circle"></i> Earn while learning</li><li><i class="fas fa-check-circle"></i> Save time & effort</li><li><i class="fas fa-check-circle"></i> Build peer network</li><li><i class="fas fa-check-circle"></i> Micro-employment opportunities</li><li><i class="fas fa-check-circle"></i> Expert access</li></ul>
+            </div>
+            <div class="value-col"><h3><i class="fas fa-university"></i> For Campus</h3>
+                <ul><li><i class="fas fa-check-circle"></i> Promotes peer learning culture</li><li><i class="fas fa-check-circle"></i> Encourages skill monetization</li><li><i class="fas fa-check-circle"></i> Reduces academic stress</li><li><i class="fas fa-check-circle"></i> Builds collaboration networks</li><li><i class="fas fa-check-circle"></i> Creates collaborative campus vibe</li></ul>
+            </div>
+        </div>
+
+        <!-- SECTION 4: FUTURE ROADMAP -->
+        <div class="section-header">
+            <i class="fas fa-road"></i>
+            <h2>🔮 FUTURE ROADMAP</h2>
+            <span class="badge">milestones</span>
+        </div>
+        <div class="roadmap-grid">
+            <div class="roadmap-card"><span class="timeline">📱 Near-Term</span><h4>Mobile App Launch</h4><p>Better UX, push notifications</p></div>
+            <div class="roadmap-card"><span class="timeline">✅ Near-Term</span><h4>College Verification System</h4><p>Trust & safety, campus communities</p></div>
+            <div class="roadmap-card"><span class="timeline">🤖 Medium-Term</span><h4>AI Skill Matching</h4><p>Smarter feed, faster completion</p></div>
+            <div class="roadmap-card"><span class="timeline">🧑‍🏫 Medium-Term</span><h4>Internship & Mentorship Integration</h4><p>Beyond tasks — career growth</p></div>
+            <div class="roadmap-card"><span class="timeline">🏛️ Long-Term</span><h4>Multi-Campus Expansion</h4><p>Regional → National → Global</p></div>
+        </div>
+
+        <!-- FLYWHEEL EFFECT (visual) -->
+        <div class="section-header">
+            <i class="fas fa-sync-alt"></i>
+            <h2>🔥 THE FLYWHEEL EFFECT</h2>
+            <span class="badge">self‑reinforcing</span>
+        </div>
+        <div class="flywheel-box">
+            <div class="flywheel-line"><i class="fas fa-arrow-down"></i> ┌─────────────────────────┐ <i class="fas fa-arrow-down"></i></div>
+            <div class="flywheel-line">│   <i class="fas fa-users"></i> MORE USERS JOIN       │</div>
+            <div class="flywheel-line">│   (Network Effect)       │</div>
+            <div class="flywheel-line">└───────────┬─────────────┘</div>
+            <div class="flywheel-line">            │</div>
+            <div class="flywheel-line">            ▼</div>
+            <div class="flywheel-line">┌─────────────────────────────────────────────────────────┐</div>
+            <div class="flywheel-line">│    MORE TASKS POSTED  ←───→  MORE HELPERS AVAILABLE    │</div>
+            <div class="flywheel-line">└─────────────────────────────────────────────────────────┘</div>
+            <div class="flywheel-line">           ▲                                      │</div>
+            <div class="flywheel-line">           │                                      ▼</div>
+            <div class="flywheel-line">┌───────────────────┐                    ┌───────────────────┐</div>
+            <div class="flywheel-line">│  MORE TRANSACTIONS│                    │  MORE COINS BOUGHT│</div>
+            <div class="flywheel-line">│  (More Revenue)   │                    │  (More Revenue)   │</div>
+            <div class="flywheel-line">└───────────────────┘                    └───────────────────┘</div>
+            <div class="flywheel-line">           │                                      │</div>
+            <div class="flywheel-line">           └──────────→  PLATFORM INVESTS  ←──────┘</div>
+            <div class="flywheel-line">                        IN BETTER FEATURES</div>
+            <div class="flywheel-line">                                │</div>
+            <div class="flywheel-line">                                ▼</div>
+            <div class="flywheel-line">                    ┌─────────────────────────┐</div>
+            <div class="flywheel-line">                    │   BETTER UX & TRUST     │</div>
+            <div class="flywheel-line">                    │   (Retention grows)     │</div>
+            <div class="flywheel-line">                    └─────────────────────────┘</div>
+        </div>
+
+        <!-- CLOSING POWER LINES -->
+        <div class="closing-quote">
+            <p>“From individual struggle to collective growth — built on trust, sustained by value, scaled for impact.”</p>
+            <div class="alt">⚡ Lure with love. Scale with trust. Profit with purpose.</div>
+        </div>
+
+        <!-- FINAL SLIDE LAYOUT (ready to copy) -->
+        <div class="section-header">
+            <i class="fas fa-clipboard"></i>
+            <h2>📝 FINAL SLIDE LAYOUT</h2>
+        </div>
+        <div class="final-slide">
+            <h3>💰 FROM TRUST TO PROFIT: THE BROHELP ECONOMY</h3>
+            <div class="sub">Sustainable Impact. Scalable Revenue. Student-First.</div>
+            <div class="final-grid">
+                <div class="final-col"><h4>📊 REVENUE STREAMS</h4><ul><li><i class="fas fa-percent"></i> Transaction fees</li><li><i class="fas fa-coins"></i> Coin purchase margin</li><li><i class="fas fa-bullhorn"></i> Featured listings</li><li><i class="fas fa-crown"></i> Premium profiles</li><li><i class="fas fa-truck"></i> Logistics commission</li><li><i class="fas fa-ticket"></i> Event partnerships</li></ul></div>
+                <div class="final-col"><h4>📈 GROWTH PHASES</h4><ul><li><i class="fas fa-rocket"></i> 🚀 PHASE 1: LURE (0-6 mos) — Loss leader</li><li><i class="fas fa-scale-balanced"></i> ⚖️ PHASE 2: BREAKEVEN (6-12 mos) — Optimize</li><li><i class="fas fa-chart-line"></i> 📈 PHASE 3: PROFIT & SCALE (Year 2+) — Expand</li></ul></div>
+                <div class="final-col"><h4>💡 VALUE PROPOSITION</h4><ul><li><i class="fas fa-check"></i> Earn while learning</li><li><i class="fas fa-check"></i> Save time & effort</li><li><i class="fas fa-check"></i> Build peer network</li><li><i class="fas fa-check"></i> Micro-employment</li><li><i class="fas fa-check"></i> Reduces academic stress</li><li><i class="fas fa-check"></i> Peer learning culture</li></ul></div>
+                <div class="final-col"><h4>🔮 FUTURE ROADMAP</h4><ul><li><i class="fas fa-mobile"></i> Mobile App</li><li><i class="fas fa-check-double"></i> College Verification</li><li><i class="fas fa-robot"></i> AI Skill Matching</li><li><i class="fas fa-chalkboard-user"></i> Mentorship Integration</li><li><i class="fas fa-globe"></i> Multi-Campus Expansion</li></ul></div>
+            </div>
+            <div class="footer-note">🔥 "From individual struggle to collective growth — built on trust, sustained by value, scaled for impact."</div>
+        </div>
+
+        <!-- color palette footer -->
+        <hr>
+        <div style="display: flex; justify-content: space-between; align-items: center; font-weight: 900; padding: 1rem 0;">
+            <span><i class="fas fa-crown" style="color: #FBBF24;"></i> violet · purple · indigo · blue · gold</span>
+            <span style="display: flex; gap: 15px;">
+                <i class="fas fa-square" style="color: #5B21B6;"></i>
+                <i class="fas fa-square" style="color: #7C3AED;"></i>
+                <i class="fas fa-square" style="color: #2563EB;"></i>
+                <i class="fas fa-square" style="color: #FBBF24;"></i>
+            </span>
+        </div>
+    </div>
+</body>
+</html>
